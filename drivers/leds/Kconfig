@@ -836,6 +836,12 @@ config LEDS_LM36274
 	  Say Y to enable the LM36274 LED driver for TI LMU devices.
 	  This supports the LED device LM36274.
 
+config LEDS_FD6551
+	tristate "FD6551 driver"
+	depends on I2C
+	help
+	  Say Y to enable the FD6551 driver.
+
 comment "LED Triggers"
 source "drivers/leds/trigger/Kconfig"
 
