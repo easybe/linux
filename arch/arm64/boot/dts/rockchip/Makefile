@@ -4,6 +4,7 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-evb.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-roc-cc.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-a1.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-box.dtb
+dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-box-h96mp.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-box-trn9.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-box-z28.dtb
 dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-evb.dtb
