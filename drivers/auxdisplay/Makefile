@@ -3,6 +3,7 @@
 # Makefile for the kernel auxiliary displays device drivers.
 #
 
+obj-$(CONFIG_7SEGDISPLAY)	+= sevensegdisp.o
 obj-$(CONFIG_CHARLCD)		+= charlcd.o
 obj-$(CONFIG_ARM_CHARLCD)	+= arm-charlcd.o
 obj-$(CONFIG_KS0108)		+= ks0108.o

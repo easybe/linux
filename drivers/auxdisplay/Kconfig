@@ -471,6 +471,12 @@ choice
 
 endchoice
 
+config 7SEGDISPLAY
+       tristate "7-segment display driver"
+       depends on FD6551
+       help
+         Say Y to enable the 7-segment display driver.
+
 config FD6551
         tristate "FD6551 driver"
         depends on I2C
