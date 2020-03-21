@@ -90,6 +90,44 @@
 		};
 	};
 
+	i2c-gpio-0 {
+		compatible = "i2c-gpio";
+		gpios = <&gpio2 RK_PC6 GPIO_ACTIVE_HIGH /* sda */
+			 &gpio2 RK_PC3 GPIO_ACTIVE_HIGH /* scl */
+			>;
+		i2c-gpio,sda-open-drain;
+		i2c-gpio,scl-open-drain;
+		i2c-gpio,delay-us = <2>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "okay";
+
+		fd6551: display-controller@0 {
+			compatible = "fdhisi,fd6551";
+			reg = <0x08>;
+		};
+	};
+
+	aux-display {
+		compatible = "seven-segment-display";
+		display-controller = <&fd6551>;
+
+		enable@0x24 {
+			reg = <0x24>;
+		};
+
+		glyphs@0x33 {
+			reg = <0x33>;
+			glyph-names = "alarm", "usb", "play", "pause", "colon",
+				"ethernet", "wifi";
+		};
+
+		digits@0x34 {
+			reg = <0x34>, <0x35>, <0x36>, <0x37>;
+			digits-flipped;
+		};
+	};
+
 	sdio_pwrseq: sdio-pwrseq {
 		compatible = "mmc-pwrseq-simple";
 		pinctrl-names = "default";
