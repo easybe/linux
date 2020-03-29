@@ -471,6 +471,12 @@ choice
 
 endchoice
 
+config FD6551
+        tristate "FD6551 driver"
+        depends on I2C
+        help
+          Say Y to enable the FD6551 driver.
+
 endif # AUXDISPLAY
 
 config PANEL
