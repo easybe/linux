@@ -21,7 +21,7 @@
 		compatible = "regulator-fixed";
 		gpio = <&gpio0 RK_PD6 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
-		pinctrl-0 = <&sdmmc0m1_gpio>;
+		pinctrl-0 = <&sdmmc0m1_pin>;
 		regulator-name = "vcc_sd";
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
@@ -291,7 +291,7 @@
 
 	clk_32k {
 		clk_32k_out: clk-32k-out {
-			rockchip,pins = <1 RK_PD4 RK_FUNC_1 &pcfg_pull_none>;
+			rockchip,pins = <1 RK_PD4 1 &pcfg_pull_none>;
 		};
 	};
 
