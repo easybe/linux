@@ -52,24 +52,6 @@
 		reset-gpios = <&gpio1 RK_PC2 GPIO_ACTIVE_LOW>;
 	};
 
-	spdif-sound {
-		compatible = "simple-audio-card";
-		simple-audio-card,name = "SPDIF";
-
-		simple-audio-card,cpu {
-			sound-dai = <&spdif>;
-		};
-
-		simple-audio-card,codec {
-			sound-dai = <&spdif_out>;
-		};
-	};
-
-	spdif_out: spdif-out {
-		compatible = "linux,spdif-dit";
-		#sound-dai-cells = <0>;
-	};
-
 	/* Power tree */
 	vccio_1v8: vccio-1v8-regulator {
 		compatible = "regulator-fixed";
@@ -310,6 +292,14 @@
 
 &spdif {
 	pinctrl-0 = <&spdifm0_tx>;
+	status = "okay";
+};
+
+&spdif_out {
+	status = "okay";
+};
+
+&spdif_sound {
 	status = "okay";
 };
 

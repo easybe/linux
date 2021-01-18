@@ -279,6 +279,26 @@
 		status = "disabled";
 	};
 
+	spdif_sound: spdif-sound {
+		compatible = "simple-audio-card";
+		simple-audio-card,name = "SPDIF";
+		status = "disabled";
+
+		simple-audio-card,cpu {
+			sound-dai = <&spdif>;
+		};
+
+		simple-audio-card,codec {
+			sound-dai = <&spdif_out>;
+		};
+	};
+
+	spdif_out: spdif-out {
+		compatible = "linux,spdif-dit";
+		#sound-dai-cells = <0>;
+		status = "disabled";
+	};
+
 	pdm: pdm@ff040000 {
 		compatible = "rockchip,pdm";
 		reg = <0x0 0xff040000 0x0 0x1000>;
