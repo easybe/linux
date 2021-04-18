@@ -377,6 +377,11 @@ properties:
           - const: google,veyron
           - const: rockchip,rk3288
 
+      - description: Haochuangyi H96 Max+ TV Box
+        items:
+          - const: hugsun,h96-max-plus
+          - const: rockchip,rk3328
+
       - description: Haoyu MarsBoard RK3066
         items:
           - const: haoyu,marsboard-rk3066
