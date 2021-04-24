@@ -206,9 +206,6 @@
 };
 
 &pinctrl {
-	pinctrl-0 = <&clk_32k_out>;
-	pinctrl-names = "default";
-
 	ir {
 		ir_int: ir-int {
 			rockchip,pins = <2 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
