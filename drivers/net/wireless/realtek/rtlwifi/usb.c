@@ -1030,6 +1030,9 @@ int rtl_usb_probe(struct usb_interface *intf,
 		pr_err("Can't register mac80211 hw.\n");
 		goto error_out;
 	}
+
+	rtl_debug_add_one(hw);
+
 	rtlpriv->mac80211.mac80211_registered = 1;
 
 	set_bit(RTL_STATUS_INTERFACE_START, &rtlpriv->status);
