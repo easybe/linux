@@ -4599,12 +4599,13 @@ void rtl8xxxu_update_rate_mask(struct rtl8xxxu_priv *priv,
 	h2c.ramask.mask_lo = cpu_to_le16(ramask & 0xffff);
 	h2c.ramask.mask_hi = cpu_to_le16(ramask >> 16);
 
-	h2c.ramask.arg = 0x80;
+	h2c.ramask.arg = 0x82;
 	if (sgi)
 		h2c.ramask.arg |= 0x20;
 
 	dev_dbg(&priv->udev->dev, "%s: rate mask %08x, arg %02x, size %zi\n",
 		__func__, ramask, h2c.ramask.arg, sizeof(h2c.ramask));
+	dev_dbg(&priv->udev->dev, "rateid: %d\n", rateid);
 	rtl8xxxu_gen1_h2c_cmd(priv, &h2c, sizeof(h2c.ramask));
 }
 
@@ -4919,6 +4920,8 @@ void rtl8xxxu_update_ra_report(struct rtl8xxxu_ra_report *rarpt,
 	u8 mcs, nss;
 
 	rarpt->txrate.flags = 0;
+
+	pr_debug("rate: %d\n", rate);
 
 	if (rate <= DESC_RATE_54M) {
 		rarpt->txrate.legacy = rtl8xxxu_legacy_ratetable[rate].bitrate;
@@ -7135,6 +7138,8 @@ rtl8xxxu_sta_statistics(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 {
 	struct rtl8xxxu_priv *priv = hw->priv;
 
+	pr_debug("txrate: legacy: %d, mcs: %d, nss: %d, bw: %d\n", priv->ra_report.txrate.legacy, priv->ra_report.txrate.mcs, priv->ra_report.txrate.nss, priv->ra_report.txrate.bw);
+
 	sinfo->txrate = priv->ra_report.txrate;
 	sinfo->filled |= BIT_ULL(NL80211_STA_INFO_TX_BITRATE);
 }
@@ -7193,11 +7198,13 @@ static void rtl8xxxu_refresh_rate_mask(struct rtl8xxxu_priv *priv,
 		rate_bitmap = (sta->deflink.supp_rates[0] & 0xfff) |
 				(sta->deflink.ht_cap.mcs.rx_mask[0] << 12) |
 				(sta->deflink.ht_cap.mcs.rx_mask[1] << 20);
+		dev_dbg(&priv->udev->dev, "rate_bitmap: %08x\n", rate_bitmap);
 		if (sta->deflink.ht_cap.cap &
 		    (IEEE80211_HT_CAP_SGI_40 | IEEE80211_HT_CAP_SGI_20))
 			sgi = 1;
 
 		wireless_mode = rtl8xxxu_wireless_mode(hw, sta);
+		dev_dbg(&priv->udev->dev, "wireless_mode: %d\n", wireless_mode);
 		switch (wireless_mode) {
 		case WIRELESS_MODE_B:
 			ratr_idx = RATEID_IDX_B;
